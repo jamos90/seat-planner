@@ -1,0 +1,19 @@
+.table-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.name-tag {
+  height: 20px;
+  max-width: 500px;
+  min-width: 10px;
+  border: 1px solid black;
+  display: inline-block;
+}
+
+.table {
+  border: 1px solid black;
+  width: 100px;
+}

@@ -1,1 +1,23 @@
 <input type="file" accept=".csv" (change)="importDataFromCSV($event)" />
+
+<div class="name-tag" *ngFor="let guestTag of data; let i = index" cdkDrag>
+  <span>{{ guestTag.name }}</span>
+</div>
+
+<div class="table"></div>
+<div class="table-container">
+  <!-- <div class="table" [style.height]="setTableHeight()" cdkDrag></div>
+  <div class="table" [style.height]="setTableHeight()" cdkDrag></div> -->
+  <app-resizable-table
+    [width]="300"
+    [height]="150"
+    [left]="100"
+    [top]="100"
+  ></app-resizable-table>
+  <app-resizable-table
+    [width]="300"
+    [height]="150"
+    [left]="100"
+    [top]="100"
+  ></app-resizable-table>
+</div>

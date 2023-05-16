@@ -15,12 +15,23 @@ export class AppComponent {
   public async importDataFromCSV(event: any) {
     let fileContent = await this.getTextFromFile(event);
     this.data = this.csvService.importDataFromCSV(fileContent);
-    console.log(this.data);
+    this.data.forEach((element: any) => {
+      element;
+    });
   }
 
   private async getTextFromFile(event: any) {
     const file: File = event.target.files[0];
     let fileContent = await file.text();
     return fileContent;
+  }
+
+  public setTableHeight() {
+    return this.data.length > 0 ? `${this.data.length * 20}px` : '0px';
+  }
+
+  public setNameTagWidth(index: number) {
+    const nameLength = this.data[index].name.length;
+    console.log(nameLength);
   }
 }
