@@ -89,40 +89,16 @@ export class ResizableTableComponent implements OnInit, AfterViewInit {
   }
 
   private resize() {
-    // if (this.resizeCondMeet()) {
     this.width = Number(this.mouse.x > this.boxPosition.left)
       ? this.mouse.x - this.boxPosition.left
       : 0;
     this.height = Number(this.mouse.y > this.boxPosition.top)
       ? this.mouse.y - this.boxPosition.top
       : 0;
-    // }
-  }
-
-  private resizeCondMeet() {
-    return (
-      this.mouse.x < this.containerPos.right &&
-      this.mouse.y < this.containerPos.bottom
-    );
   }
 
   private move() {
-    // if (this.moveCondMeet()) {
     this.left = this.mouseClick.left + (this.mouse.x - this.mouseClick.x);
     this.top = this.mouseClick.top + (this.mouse.y - this.mouseClick.y);
-    // }
-  }
-
-  private moveCondMeet() {
-    const offsetLeft = this.mouseClick.x - this.boxPosition.left;
-    const offsetRight = this.width - offsetLeft;
-    const offsetTop = this.mouseClick.y - this.boxPosition.top;
-    const offsetBottom = this.height - offsetTop;
-    return (
-      this.mouse.x > this.containerPos.left + offsetLeft &&
-      this.mouse.x < this.containerPos.right - offsetRight &&
-      this.mouse.y > this.containerPos.top + offsetTop &&
-      this.mouse.y < this.containerPos.bottom - offsetBottom
-    );
   }
 }

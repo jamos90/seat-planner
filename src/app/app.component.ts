@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CsvService } from './services/csv.service';
+import { ScreenCaptureService } from './services/screen-capture.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ export class AppComponent {
   title = 'seat-planner';
   data: any;
 
-  constructor(private csvService: CsvService) {}
+  constructor(
+    private csvService: CsvService,
+    private screenCaptureService: ScreenCaptureService
+  ) {}
 
   public async importDataFromCSV(event: any) {
     let fileContent = await this.getTextFromFile(event);
@@ -33,5 +37,9 @@ export class AppComponent {
   public setNameTagWidth(index: number) {
     const nameLength = this.data[index].name.length;
     console.log(nameLength);
+  }
+
+  public captureAndDownloadSeatPlan() {
+    this.screenCaptureService.takeAndDownloadScreen();
   }
 }
