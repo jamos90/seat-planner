@@ -19,13 +19,13 @@ export class CsvService {
       for (let index = 0; index < propertyNames.length; index++) {
         const propertyName: string = propertyNames[index];
         let val: any = values[index];
-        if (val === '') {
-          val = null;
+        console.log(val);
+        if (val !== '') {
+          obj[propertyName.replace(/[\n\r]/g, '').toLowerCase()] = val.replace(
+            /[\n\r]/g,
+            ''
+          );
         }
-        obj[propertyName.replace(/[\n\r]/g, '').toLowerCase()] = val.replace(
-          /[\n\r]/g,
-          ''
-        );
       }
       dataArray.push(obj);
     });

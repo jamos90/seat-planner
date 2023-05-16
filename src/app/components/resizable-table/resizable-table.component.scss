@@ -1,5 +1,7 @@
 .resizable-draggable {
   outline: 1px dashed green;
+  border: 1px solid black;
+  z-index: 0;
   &.active {
     outline-style: solid;
     background-color: #80ff800d;

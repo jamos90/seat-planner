@@ -11,6 +11,9 @@
   min-width: 10px;
   border: 1px solid black;
   display: inline-block;
+  z-index: 999;
+  position: relative;
+  padding: 1px 5px;
 }
 
 .table {
