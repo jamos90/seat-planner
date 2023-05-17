@@ -9,6 +9,6 @@
   (mousedown)="setStatus($event, 2)"
   (window:mouseup)="setStatus($event, 0)"
 >
-  <div (click)="removeTable()">x</div>
+  <div class="remove-table" (click)="removeTable()">x</div>
   <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
 </div>

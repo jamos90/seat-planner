@@ -4,7 +4,6 @@
   z-index: 0;
   background-image: url("/assets/wood-texture.jpeg");
   position: fixed;
-  // border-radius: 0%;
 
   &.active {
     outline-style: solid;
@@ -48,5 +47,14 @@
   &:hover,
   &:active {
     cursor: nwse-resize;
+  }
+}
+
+.remove-table {
+  width: 2%;
+  color: red;
+
+  &:hover {
+    cursor: pointer;
   }
 }
