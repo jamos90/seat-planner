@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CsvService } from './services/csv.service';
 import { ScreenCaptureService } from './services/screen-capture.service';
+import { FormBuilderService } from './services/form-builder.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,15 @@ import { ScreenCaptureService } from './services/screen-capture.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'seat-planner';
-  data: any;
-
   constructor(
     private csvService: CsvService,
-    private screenCaptureService: ScreenCaptureService
+    private screenCaptureService: ScreenCaptureService,
+    private formBuilder: FormBuilderService
   ) {}
+
+  title = 'seat-planner';
+  data: any;
+  settingsForm = this.formBuilder.createPropertyKeyChangeForm();
 
   public async importDataFromCSV(event: any) {
     let fileContent = await this.getTextFromFile(event);
@@ -32,11 +35,6 @@ export class AppComponent {
 
   public setTableHeight() {
     return this.data.length > 0 ? `${this.data.length * 20}px` : '0px';
-  }
-
-  public setNameTagWidth(index: number) {
-    const nameLength = this.data[index].name.length;
-    console.log(nameLength);
   }
 
   public captureAndDownloadSeatPlan() {

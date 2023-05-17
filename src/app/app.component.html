@@ -1,22 +1,61 @@
-<input type="file" accept=".csv" (change)="importDataFromCSV($event)" />
-<button (click)="captureAndDownloadSeatPlan()">Capture and download</button>
-<div class="name-tag" *ngFor="let guestTag of data; let i = index" cdkDrag>
-  <span>{{ guestTag.name }}</span>
-</div>
-
-<div class="table-container">
-  <!-- <div class="table" [style.height]="setTableHeight()" cdkDrag></div>
-  <div class="table" [style.height]="setTableHeight()" cdkDrag></div> -->
-  <app-resizable-table
-    [width]="300"
-    [height]="150"
-    [left]="100"
-    [top]="100"
-  ></app-resizable-table>
-  <app-resizable-table
-    [width]="300"
-    [height]="150"
-    [left]="100"
-    [top]="100"
-  ></app-resizable-table>
+<div class="app-container">
+  <div class="interaction-container">
+    <div class="file-input-container">
+      <p>Select your file (.csv format only)</p>
+      <input type="file" accept=".csv" (change)="importDataFromCSV($event)" />
+    </div>
+    <form [formGroup]="settingsForm" class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Message</mat-label>
+        <input
+          id="guestNameKey"
+          formControlName="guestNameKey"
+          matInput
+          #message
+          maxlength="256"
+          value="name"
+          placeholder="Guest name property value"
+        />
+        <mat-hint align="start"
+          >Input the property name of your csv file for the name values
+        </mat-hint>
+      </mat-form-field>
+    </form>
+    <button
+      type="button"
+      class="capture-button"
+      mat-raised-button
+      color="primary"
+      (click)="captureAndDownloadSeatPlan()"
+    >
+      Capture and download
+    </button>
+  </div>
+  <div class="contents-container">
+    <div>
+      <div
+        class="name-tag"
+        *ngFor="let guestTag of data; let i = index"
+        cdkDrag
+      >
+        <span>{{ guestTag[settingsForm.controls["guestNameKey"].value] }}</span>
+      </div>
+    </div>
+    <div class="table-container">
+      <!-- <div class="table" [style.height]="setTableHeight()" cdkDrag></div>
+              <div class="table" [style.height]="setTableHeight()" cdkDrag></div> -->
+      <app-resizable-table
+        [width]="300"
+        [height]="150"
+        [left]="100"
+        [top]="100"
+      ></app-resizable-table>
+      <app-resizable-table
+        [width]="300"
+        [height]="150"
+        [left]="100"
+        [top]="100"
+      ></app-resizable-table>
+    </div>
+  </div>
 </div>

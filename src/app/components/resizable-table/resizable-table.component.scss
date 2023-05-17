@@ -2,6 +2,8 @@
   outline: 1px dashed green;
   border: 1px solid black;
   z-index: 0;
+  background-image: url("/assets/wood-texture.jpeg");
+
   &.active {
     outline-style: solid;
     background-color: #80ff800d;
@@ -9,6 +11,10 @@
 
   &:hover {
     cursor: all-scroll;
+  }
+
+  .table-img {
+    object-fit: contain;
   }
 
   span:first-of-type {

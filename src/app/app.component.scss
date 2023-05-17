@@ -1,22 +1,45 @@
-.table-container {
+.app-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-}
+  height: 100vh;
 
-.name-tag {
-  height: 20px;
-  max-width: 500px;
-  min-width: 10px;
-  border: 1px solid black;
-  display: inline-block;
-  z-index: 999;
-  position: relative;
-  padding: 1px 5px;
-}
+  .interaction-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid black;
 
-.table {
-  border: 1px solid black;
-  width: 100px;
+    .file-input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .capture-button {
+      max-width: 80%;
+    }
+  }
+
+  .table-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .name-tag {
+    height: 20px;
+    max-width: 500px;
+    min-width: 10px;
+    border: 1px solid black;
+    display: inline-block;
+    z-index: 999;
+    position: fixed;
+    padding: 1px 5px;
+  }
+
+  .table {
+    border: 1px solid black;
+    width: 100px;
+  }
 }
