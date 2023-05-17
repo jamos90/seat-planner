@@ -3,6 +3,8 @@
   border: 1px solid black;
   z-index: 0;
   background-image: url("/assets/wood-texture.jpeg");
+  position: fixed;
+  // border-radius: 0%;
 
   &.active {
     outline-style: solid;

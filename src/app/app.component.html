@@ -2,11 +2,16 @@
   <div class="interaction-container">
     <div class="file-input-container">
       <p>Select your file (.csv format only)</p>
-      <input type="file" accept=".csv" (change)="importDataFromCSV($event)" />
+      <input
+        class="file-selection"
+        type="file"
+        accept=".csv"
+        (change)="importDataFromCSV($event)"
+      />
     </div>
-    <form [formGroup]="settingsForm" class="example-form">
+    <form [formGroup]="settingsForm" class="settings-form">
       <mat-form-field class="example-full-width">
-        <mat-label>Message</mat-label>
+        <mat-label>Property name</mat-label>
         <input
           id="guestNameKey"
           formControlName="guestNameKey"
@@ -16,11 +21,42 @@
           value="name"
           placeholder="Guest name property value"
         />
-        <mat-hint align="start"
-          >Input the property name of your csv file for the name values
-        </mat-hint>
+        <mat-hint
+          >Input csv column header to display on name tag. Eg name</mat-hint
+        >
       </mat-form-field>
+      <mat-form-field>
+        <mat-label>Number of tables</mat-label>
+        <input
+          matInput
+          type="number"
+          max="50"
+          min="0"
+          formControlName="numberOfTables"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Table type</mat-label>
+        <select formControlName="tableType" matNativeControl required>
+          <option value="circular">Circular</option>
+          <option value="rectangle">Rectangle</option>
+          <option value="square">Square</option>
+        </select>
+      </mat-form-field>
+      <span *ngIf="showFormError">
+        Please select a table type and a number of tables greater than 0
+      </span>
     </form>
+    <button
+      type="button"
+      class="generation-button"
+      mat-raised-button
+      color="primary"
+      (click)="generateTables()"
+    >
+      Generate Tables
+    </button>
     <button
       type="button"
       class="capture-button"
@@ -32,7 +68,7 @@
     </button>
   </div>
   <div class="contents-container">
-    <div>
+    <div class="name-tag-container">
       <div
         class="name-tag"
         *ngFor="let guestTag of data; let i = index"
@@ -41,21 +77,18 @@
         <span>{{ guestTag[settingsForm.controls["guestNameKey"].value] }}</span>
       </div>
     </div>
-    <div class="table-container">
-      <!-- <div class="table" [style.height]="setTableHeight()" cdkDrag></div>
-              <div class="table" [style.height]="setTableHeight()" cdkDrag></div> -->
-      <app-resizable-table
-        [width]="300"
-        [height]="150"
-        [left]="100"
-        [top]="100"
-      ></app-resizable-table>
-      <app-resizable-table
-        [width]="300"
-        [height]="150"
-        [left]="100"
-        [top]="100"
-      ></app-resizable-table>
+    <div class="table-container" *ngIf="showTables">
+      <div *ngFor="let table of tableArray; let i = index">
+        <app-resizable-table
+          [width]="table.startingHeight"
+          [height]="table.startingWidth"
+          [left]="100"
+          [top]="100"
+          [borderRadius]="table.borderRadius"
+          [indexPosition]="i"
+          (deleteTable)="removeTableFromArray($event)"
+        ></app-resizable-table>
+      </div>
     </div>
   </div>
 </div>

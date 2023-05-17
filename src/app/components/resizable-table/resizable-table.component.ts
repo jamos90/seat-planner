@@ -5,7 +5,9 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  HostListener
+  HostListener,
+  Output,
+  EventEmitter
 } from '@angular/core';
 
 const enum Status {
@@ -24,6 +26,9 @@ export class ResizableTableComponent implements OnInit, AfterViewInit {
   @Input('height') public height: number;
   @Input('left') public left: number;
   @Input('top') public top: number;
+  @Input('borderRadius') public borderRadius: number;
+  @Input('indexPosition') public indexPosition: number;
+  @Output() deleteTable = new EventEmitter<number>();
   @ViewChild('box') public box: ElementRef;
   private boxPosition: {
     left: number;
@@ -100,5 +105,10 @@ export class ResizableTableComponent implements OnInit, AfterViewInit {
   private move() {
     this.left = this.mouseClick.left + (this.mouse.x - this.mouseClick.x);
     this.top = this.mouseClick.top + (this.mouse.y - this.mouseClick.y);
+  }
+
+  removeTable() {
+    console.log(this.indexPosition);
+    this.deleteTable.emit(this.indexPosition);
   }
 }

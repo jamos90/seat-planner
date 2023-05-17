@@ -14,7 +14,9 @@ export class FormBuilderService {
 
   createPropertyKeyChangeForm(): FormGroup {
     const formGroup = this.fb.group({
-      guestNameKey: new FormControl('')
+      guestNameKey: new FormControl(''),
+      numberOfTables: new FormControl(0, Validators.required),
+      tableType: new FormControl('', Validators.required)
     });
     return formGroup;
   }
