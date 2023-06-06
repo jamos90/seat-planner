@@ -9,6 +9,11 @@
   (mousedown)="setStatus($event, 2)"
   (window:mouseup)="setStatus($event, 0)"
 >
-  <div class="remove-table" (click)="removeTable()">x</div>
-  <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+  <!-- <div class="seating-list-left" cdkDropList>I'm seating</div> -->
+  <div class="table-container">
+    <div class="table"></div>
+    <div class="remove-table" (click)="removeTable()">x</div>
+    <div class="resize-action" (mousedown)="setStatus($event, 1)"></div>
+  </div>
+  <!-- <div class="seating-list-right" cdkDropList>I'm seating</div> -->
 </div>

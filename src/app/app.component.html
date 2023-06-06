@@ -1,13 +1,20 @@
 <div class="app-container">
   <div class="interaction-container">
-    <div class="file-input-container">
-      <p>Select your file (.csv format only)</p>
+    <div class="file-input-container" *ngIf="!this.data.length">
+      <label>Select your file (.csv format only)</label>
       <input
         class="file-selection"
         type="file"
         accept=".csv"
         (change)="importDataFromCSV($event)"
       />
+    </div>
+    <div class="name-search-container" *ngIf="this.data.length > 0">
+      <app-name-list
+        [componentData]="data"
+        [filterProperty]="settingsForm.controls['guestNameKey'].value"
+        (nameSelected)="createNameTag($event)"
+      ></app-name-list>
     </div>
     <form [formGroup]="settingsForm" class="settings-form">
       <mat-form-field class="example-full-width">
@@ -21,9 +28,6 @@
           value="name"
           placeholder="Guest name property value"
         />
-        <mat-hint
-          >Input csv column header to display on name tag. Eg name</mat-hint
-        >
       </mat-form-field>
       <mat-form-field>
         <mat-label>Number of tables</mat-label>
@@ -48,33 +52,37 @@
         Please select a table type and a number of tables greater than 0
       </span>
     </form>
-    <button
-      type="button"
-      class="generation-button"
-      mat-raised-button
-      color="primary"
-      (click)="generateTables()"
-    >
-      Generate Tables
-    </button>
-    <button
-      type="button"
-      class="capture-button"
-      mat-raised-button
-      color="primary"
-      (click)="captureAndDownloadSeatPlan()"
-    >
-      Capture and download
-    </button>
+    <div class="button-container">
+      <button
+        type="button"
+        class="generation-button"
+        mat-raised-button
+        color="primary"
+        (click)="generateTables()"
+      >
+        Generate Tables
+      </button>
+      <button
+        type="button"
+        class="capture-button"
+        mat-raised-button
+        color="primary"
+        (click)="captureAndDownloadSeatPlan()"
+      >
+        Capture and download
+      </button>
+    </div>
   </div>
   <div class="contents-container">
     <div class="name-tag-container">
       <div
         class="name-tag"
-        *ngFor="let guestTag of data; let i = index"
+        *ngFor="let guestTag of nameTags; let i = index"
         cdkDrag
+        [style.transform]="'translateY(' + i * 40 + '%)'"
       >
-        <span>{{ guestTag[settingsForm.controls["guestNameKey"].value] }}</span>
+        <!-- {{ guestTag[settingsForm.controls["guestNameKey"].value] }} -->
+        {{ guestTag }}
       </div>
     </div>
     <div class="table-container" *ngIf="showTables">

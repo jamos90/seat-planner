@@ -1,0 +1,38 @@
+<!-- <div
+cdkDropList
+#todoList="cdkDropList"
+[cdkDropListData]="todo"
+[cdkDropListConnectedTo]="[doneList]"
+class="example-list"
+(cdkDropListDropped)="drop($event)"> -->
+<!-- <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div> -->
+<!-- <app-name-tag></app-name-tag> -->
+<!-- </div> -->
+<div>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Number</mat-label>
+      <input
+        type="text"
+        placeholder="Pick one"
+        aria-label="Number"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        (keyup.enter)="handleNameTagCreation($event)"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        (optionSelected)="handleNameTagCreation($event)"
+      >
+        <mat-option
+          cdkDrag
+          *ngFor="let option of filteredOptions | async"
+          [value]="option[filterProperty]"
+        >
+          {{ option[filterProperty] }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>

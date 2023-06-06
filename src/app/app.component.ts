@@ -34,19 +34,17 @@ export class AppComponent {
   };
 
   title = 'seat-planner';
-  data: any;
+  data: any[] = [];
   settingsForm = this.formBuilder.createPropertyKeyChangeForm();
   showTables: boolean = false;
   numberOfTables: number = 0;
   tableArray: any[] = [];
   showFormError: boolean = false;
+  nameTags: any = [];
 
   public async importDataFromCSV(event: any) {
     let fileContent = await this.getTextFromFile(event);
     this.data = this.csvService.importDataFromCSV(fileContent);
-    this.data.forEach((element: any) => {
-      element;
-    });
   }
 
   private async getTextFromFile(event: any) {
@@ -87,5 +85,10 @@ export class AppComponent {
 
   removeTableFromArray(tableToRemoveIndex: number) {
     this.tableArray.splice(tableToRemoveIndex, 1);
+  }
+
+  createNameTag(event: any) {
+    console.log(event);
+    this.nameTags.push(event.name);
   }
 }

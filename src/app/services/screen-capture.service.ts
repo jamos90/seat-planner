@@ -14,9 +14,7 @@ export class ScreenCaptureService {
     this.captureService
       .getImage(document.body, true)
       .pipe(
-        tap(img => {
-          console.log(img);
-        }),
+        tap(img => {}),
         tap((img: any) => this.captureService.downloadImage(img))
       )
       .subscribe();
