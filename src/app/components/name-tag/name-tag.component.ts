@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-name-tag',
@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./name-tag.component.scss']
 })
 export class NameTagComponent {
+  @Input() tagData: any;
+
   drop($event: any) {
     console.log($event);
   }

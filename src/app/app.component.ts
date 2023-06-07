@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CsvService } from './services/csv.service';
 import { ScreenCaptureService } from './services/screen-capture.service';
 import { FormBuilderService } from './services/form-builder.service';
+import { TableService } from './services/table.service';
 
 @Component({
   selector: 'app-root',
@@ -12,26 +13,9 @@ export class AppComponent {
   constructor(
     private csvService: CsvService,
     private screenCaptureService: ScreenCaptureService,
-    private formBuilder: FormBuilderService
+    private formBuilder: FormBuilderService,
+    private tableService: TableService
   ) {}
-
-  DEFAULT_TABLE_DIMENSIONS: any = {
-    circular: {
-      height: 100,
-      width: 100,
-      borderRadius: 50
-    },
-    square: {
-      height: 100,
-      width: 100,
-      borderRadius: 0
-    },
-    rectangle: {
-      height: 300,
-      width: 100,
-      borderRadius: 0
-    }
-  };
 
   title = 'seat-planner';
   data: any[] = [];
@@ -53,42 +37,31 @@ export class AppComponent {
     return fileContent;
   }
 
-  public setTableHeight() {
-    return this.data.length > 0 ? `${this.data.length * 20}px` : '0px';
-  }
-
-  public captureAndDownloadSeatPlan() {
+  public captureAndDownloadSeatPlan(): void {
     this.screenCaptureService.takeAndDownloadScreen();
   }
 
-  public generateTables() {
+  public generateTables(): void {
     this.showFormError = false;
     if (
       this.settingsForm.get('tableType')!.value &&
       this.settingsForm.get('numberOfTables')!.value > 0
     ) {
-      this.tableArray = [];
-      const tableType = this.settingsForm.get('tableType')!.value;
-      for (let i = 0; i < this.settingsForm.get('numberOfTables')!.value; i++) {
-        this.tableArray.push({
-          tableType: tableType,
-          startingHeight: this.DEFAULT_TABLE_DIMENSIONS[tableType].height,
-          startingWidth: this.DEFAULT_TABLE_DIMENSIONS[tableType].width,
-          borderRadius: this.DEFAULT_TABLE_DIMENSIONS[tableType].borderRadius
-        });
-      }
+      this.tableArray = this.tableService.generateTables(
+        this.settingsForm.get('tableType')!.value,
+        this.settingsForm.get('numberOfTables')!.value
+      );
       this.showTables = true;
     } else {
       this.showFormError = true;
     }
   }
 
-  removeTableFromArray(tableToRemoveIndex: number) {
+  removeTableFromArray(tableToRemoveIndex: number): void {
     this.tableArray.splice(tableToRemoveIndex, 1);
   }
 
   createNameTag(event: any) {
-    console.log(event);
     this.nameTags.push(event.name);
   }
 }

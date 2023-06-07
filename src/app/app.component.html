@@ -77,28 +77,25 @@
   </div>
   <div class="contents-container">
     <div class="name-tag-container">
-      <div
-        class="name-tag"
+      <app-name-tag
         *ngFor="let guestTag of nameTags; let i = index"
+        [tagData]="guestTag"
         cdkDrag
         [style.transform]="'translateY(' + i * 40 + '%)'"
       >
-        <!-- {{ guestTag[settingsForm.controls["guestNameKey"].value] }} -->
-        {{ guestTag }}
-      </div>
+      </app-name-tag>
     </div>
     <div class="table-container" *ngIf="showTables">
-      <div *ngFor="let table of tableArray; let i = index">
-        <app-resizable-table
-          [width]="table.startingHeight"
-          [height]="table.startingWidth"
-          [left]="100"
-          [top]="100"
-          [borderRadius]="table.borderRadius"
-          [indexPosition]="i"
-          (deleteTable)="removeTableFromArray($event)"
-        ></app-resizable-table>
-      </div>
+      <app-resizable-table
+        *ngFor="let table of tableArray; let i = index"
+        [width]="table.startingHeight"
+        [height]="table.startingWidth"
+        [left]="100"
+        [top]="100"
+        [borderRadius]="table.borderRadius"
+        [indexPosition]="i"
+        (deleteTable)="removeTableFromArray($event)"
+      ></app-resizable-table>
     </div>
   </div>
 </div>
