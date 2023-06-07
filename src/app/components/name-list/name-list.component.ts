@@ -14,7 +14,6 @@ export class NameListComponent {
   @Output() nameSelected = new EventEmitter<any>();
 
   myControl = new FormControl('');
-  options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
   ngOnInit() {
@@ -22,15 +21,12 @@ export class NameListComponent {
       startWith(''),
       map((value: any) => this._filter(value || ''))
     );
-
-    console.log(this.filterProperty);
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     console.log('filter', value);
     return this.componentData.filter(option => {
-      // console.log(option);
       if (this.filterProperty) {
         return option[this.filterProperty].toLowerCase().includes(filterValue);
       }
@@ -38,7 +34,6 @@ export class NameListComponent {
   }
 
   handleNameTagCreation(event: any) {
-    console.log(event);
     this.nameSelected.emit({ name: event.option.value });
   }
 
