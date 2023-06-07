@@ -16,42 +16,44 @@
         (nameSelected)="createNameTag($event)"
       ></app-name-list>
     </div>
-    <form [formGroup]="settingsForm" class="settings-form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Property name</mat-label>
-        <input
-          id="guestNameKey"
-          formControlName="guestNameKey"
-          matInput
-          #message
-          maxlength="256"
-          value="name"
-          placeholder="Guest name property value"
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Number of tables</mat-label>
-        <input
-          matInput
-          type="number"
-          max="50"
-          min="0"
-          formControlName="numberOfTables"
-        />
-      </mat-form-field>
+    <div class="form-details-container">
+      <form [formGroup]="settingsForm" class="settings-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Property name</mat-label>
+          <input
+            id="guestNameKey"
+            formControlName="guestNameKey"
+            matInput
+            #message
+            maxlength="256"
+            value="name"
+            placeholder="Guest name property value"
+          />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Number of tables</mat-label>
+          <input
+            matInput
+            type="number"
+            max="50"
+            min="0"
+            formControlName="numberOfTables"
+          />
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Table type</mat-label>
-        <select formControlName="tableType" matNativeControl required>
-          <option value="circular">Circular</option>
-          <option value="rectangle">Rectangle</option>
-          <option value="square">Square</option>
-        </select>
-      </mat-form-field>
+        <mat-form-field>
+          <mat-label>Table type</mat-label>
+          <select formControlName="tableType" matNativeControl required>
+            <option value="circular">Circular</option>
+            <option value="rectangle">Rectangle</option>
+            <option value="square">Square</option>
+          </select>
+        </mat-form-field>
+      </form>
       <span *ngIf="showFormError">
         Please select a table type and a number of tables greater than 0
       </span>
-    </form>
+    </div>
     <div class="button-container">
       <button
         type="button"

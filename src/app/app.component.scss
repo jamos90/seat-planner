@@ -33,6 +33,18 @@
       }
     }
 
+    .form-details-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+
+      span {
+        color: red;
+        text-decoration: underline;
+      }
+    }
+
     .settings-form {
       display: flex;
       flex-direction: row;
